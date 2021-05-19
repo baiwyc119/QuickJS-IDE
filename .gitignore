@@ -1,0 +1,7 @@
+.idea/
+*weex_tmp
+*.log
+
+quickjs.tar.xz
+quickjs-2021-03-27.tar.xz
+quickjs/
