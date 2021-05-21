@@ -5,3 +5,5 @@
 quickjs.tar.xz
 quickjs-2021-03-27.tar.xz
 quickjs/
+qjs_CLion/.idea
+qjs_CLion/cmake-build-debug
