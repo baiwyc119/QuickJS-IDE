@@ -1,0 +1,343 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF0CDCF025FBC5AB00933604 /* repl.c in Sources */ = {isa = PBXBuildFile; fileRef = FF0CDCEF25FBC5AB00933604 /* repl.c */; };
+		FF0CDCF325FBC5D800933604 /* qjscalc.c in Sources */ = {isa = PBXBuildFile; fileRef = FF0CDCF225FBC5D800933604 /* qjscalc.c */; };
+		FF59A8B625FB792D00A20BEB /* cutils.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8A625FB792C00A20BEB /* cutils.c */; };
+		FF59A8B725FB792D00A20BEB /* qjs.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8A925FB792C00A20BEB /* qjs.c */; };
+		FF59A8B825FB792D00A20BEB /* libregexp.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8AB25FB792C00A20BEB /* libregexp.c */; };
+		FF59A8B925FB792D00A20BEB /* quickjs-libc.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8AC25FB792C00A20BEB /* quickjs-libc.c */; };
+		FF59A8BA25FB792D00A20BEB /* unicode_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8AF25FB792D00A20BEB /* unicode_gen.c */; };
+		FF59A8BB25FB792D00A20BEB /* quickjs.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8B025FB792D00A20BEB /* quickjs.c */; };
+		FF59A8BC25FB792D00A20BEB /* libbf.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8B125FB792D00A20BEB /* libbf.c */; };
+		FF59A8BD25FB792D00A20BEB /* libunicode.c in Sources */ = {isa = PBXBuildFile; fileRef = FF59A8B225FB792D00A20BEB /* libunicode.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FF59A82D25FB4E1D00A20BEB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FF0CDCEF25FBC5AB00933604 /* repl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = repl.c; path = "quickjs-2020-11-08/repl.c"; sourceTree = SOURCE_ROOT; };
+		FF0CDCF225FBC5D800933604 /* qjscalc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qjscalc.c; path = "quickjs-2020-11-08/qjscalc.c"; sourceTree = SOURCE_ROOT; };
+		FF59A82F25FB4E1D00A20BEB /* quickjs_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = quickjs_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF59A8A025FB792C00A20BEB /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = "quickjs-2020-11-08/list.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A125FB792C00A20BEB /* libunicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libunicode.h; path = "quickjs-2020-11-08/libunicode.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A225FB792C00A20BEB /* quickjs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quickjs.h; path = "quickjs-2020-11-08/quickjs.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A425FB792C00A20BEB /* unicode_gen_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unicode_gen_def.h; path = "quickjs-2020-11-08/unicode_gen_def.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A525FB792C00A20BEB /* libbf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libbf.h; path = "quickjs-2020-11-08/libbf.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A625FB792C00A20BEB /* cutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cutils.c; path = "quickjs-2020-11-08/cutils.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8A725FB792C00A20BEB /* libregexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libregexp.h; path = "quickjs-2020-11-08/libregexp.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A825FB792C00A20BEB /* quickjs-atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "quickjs-atom.h"; path = "quickjs-2020-11-08/quickjs-atom.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8A925FB792C00A20BEB /* qjs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qjs.c; path = "quickjs-2020-11-08/qjs.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8AA25FB792C00A20BEB /* libregexp-opcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libregexp-opcode.h"; path = "quickjs-2020-11-08/libregexp-opcode.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8AB25FB792C00A20BEB /* libregexp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libregexp.c; path = "quickjs-2020-11-08/libregexp.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8AC25FB792C00A20BEB /* quickjs-libc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "quickjs-libc.c"; path = "quickjs-2020-11-08/quickjs-libc.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8AD25FB792C00A20BEB /* libunicode-table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libunicode-table.h"; path = "quickjs-2020-11-08/libunicode-table.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8AE25FB792D00A20BEB /* cutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cutils.h; path = "quickjs-2020-11-08/cutils.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8AF25FB792D00A20BEB /* unicode_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unicode_gen.c; path = "quickjs-2020-11-08/unicode_gen.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8B025FB792D00A20BEB /* quickjs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = quickjs.c; path = "quickjs-2020-11-08/quickjs.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8B125FB792D00A20BEB /* libbf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libbf.c; path = "quickjs-2020-11-08/libbf.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8B225FB792D00A20BEB /* libunicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libunicode.c; path = "quickjs-2020-11-08/libunicode.c"; sourceTree = SOURCE_ROOT; };
+		FF59A8B325FB792D00A20BEB /* quickjs-libc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "quickjs-libc.h"; path = "quickjs-2020-11-08/quickjs-libc.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8B425FB792D00A20BEB /* quickjs-opcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "quickjs-opcode.h"; path = "quickjs-2020-11-08/quickjs-opcode.h"; sourceTree = SOURCE_ROOT; };
+		FF59A8BF25FB796C00A20BEB /* hello.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.js; sourceTree = "<group>"; };
+		FF59A8C025FB796C00A20BEB /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF59A82C25FB4E1D00A20BEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FF59A82625FB4E1D00A20BEB = {
+			isa = PBXGroup;
+			children = (
+				FF59A83125FB4E1D00A20BEB /* quickjs_test */,
+				FF59A83025FB4E1D00A20BEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF59A83025FB4E1D00A20BEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF59A82F25FB4E1D00A20BEB /* quickjs_test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF59A83125FB4E1D00A20BEB /* quickjs_test */ = {
+			isa = PBXGroup;
+			children = (
+				FF0CDCF225FBC5D800933604 /* qjscalc.c */,
+				FF0CDCEF25FBC5AB00933604 /* repl.c */,
+				FF59A8C025FB796C00A20BEB /* config.h */,
+				FF59A8BF25FB796C00A20BEB /* hello.js */,
+				FF59A8A625FB792C00A20BEB /* cutils.c */,
+				FF59A8AE25FB792D00A20BEB /* cutils.h */,
+				FF59A8B125FB792D00A20BEB /* libbf.c */,
+				FF59A8A525FB792C00A20BEB /* libbf.h */,
+				FF59A8AA25FB792C00A20BEB /* libregexp-opcode.h */,
+				FF59A8AB25FB792C00A20BEB /* libregexp.c */,
+				FF59A8A725FB792C00A20BEB /* libregexp.h */,
+				FF59A8AD25FB792C00A20BEB /* libunicode-table.h */,
+				FF59A8B225FB792D00A20BEB /* libunicode.c */,
+				FF59A8A125FB792C00A20BEB /* libunicode.h */,
+				FF59A8A025FB792C00A20BEB /* list.h */,
+				FF59A8A925FB792C00A20BEB /* qjs.c */,
+				FF59A8A825FB792C00A20BEB /* quickjs-atom.h */,
+				FF59A8AC25FB792C00A20BEB /* quickjs-libc.c */,
+				FF59A8B325FB792D00A20BEB /* quickjs-libc.h */,
+				FF59A8B425FB792D00A20BEB /* quickjs-opcode.h */,
+				FF59A8B025FB792D00A20BEB /* quickjs.c */,
+				FF59A8A225FB792C00A20BEB /* quickjs.h */,
+				FF59A8A425FB792C00A20BEB /* unicode_gen_def.h */,
+				FF59A8AF25FB792D00A20BEB /* unicode_gen.c */,
+			);
+			path = quickjs_test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF59A82E25FB4E1D00A20BEB /* quickjs_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF59A83625FB4E1D00A20BEB /* Build configuration list for PBXNativeTarget "quickjs_test" */;
+			buildPhases = (
+				FF59A82B25FB4E1D00A20BEB /* Sources */,
+				FF59A82C25FB4E1D00A20BEB /* Frameworks */,
+				FF59A82D25FB4E1D00A20BEB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = quickjs_test;
+			productName = quickjs_test;
+			productReference = FF59A82F25FB4E1D00A20BEB /* quickjs_test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF59A82725FB4E1D00A20BEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					FF59A82E25FB4E1D00A20BEB = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = FF59A82A25FB4E1D00A20BEB /* Build configuration list for PBXProject "quickjs_test" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF59A82625FB4E1D00A20BEB;
+			productRefGroup = FF59A83025FB4E1D00A20BEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF59A82E25FB4E1D00A20BEB /* quickjs_test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF59A82B25FB4E1D00A20BEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF0CDCF325FBC5D800933604 /* qjscalc.c in Sources */,
+				FF0CDCF025FBC5AB00933604 /* repl.c in Sources */,
+				FF59A8BA25FB792D00A20BEB /* unicode_gen.c in Sources */,
+				FF59A8B725FB792D00A20BEB /* qjs.c in Sources */,
+				FF59A8BB25FB792D00A20BEB /* quickjs.c in Sources */,
+				FF59A8B925FB792D00A20BEB /* quickjs-libc.c in Sources */,
+				FF59A8B825FB792D00A20BEB /* libregexp.c in Sources */,
+				FF59A8BD25FB792D00A20BEB /* libunicode.c in Sources */,
+				FF59A8B625FB792D00A20BEB /* cutils.c in Sources */,
+				FF59A8BC25FB792D00A20BEB /* libbf.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FF59A83425FB4E1D00A20BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FF59A83525FB4E1D00A20BEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FF59A83725FB4E1D00A20BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FF59A83825FB4E1D00A20BEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF59A82A25FB4E1D00A20BEB /* Build configuration list for PBXProject "quickjs_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF59A83425FB4E1D00A20BEB /* Debug */,
+				FF59A83525FB4E1D00A20BEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF59A83625FB4E1D00A20BEB /* Build configuration list for PBXNativeTarget "quickjs_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF59A83725FB4E1D00A20BEB /* Debug */,
+				FF59A83825FB4E1D00A20BEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FF59A82725FB4E1D00A20BEB /* Project object */;
+}
