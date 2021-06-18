@@ -44,6 +44,7 @@
 #include "cutils.h"
 #include "list.h"
 #include "quickjs.h"
+#include "qjs-internal.h"
 #include "libregexp.h"
 #ifdef CONFIG_BIGNUM
 #include "libbf.h"
