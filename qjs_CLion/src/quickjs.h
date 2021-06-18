@@ -25,4 +25,7 @@
 #ifndef QUICKJS_H
 #define QUICKJS_H
 #include "qjs-api.h"
+#include "qjs-internal.h"
+#include "qjs-vm.h"
+
 #endif /* QUICKJS_H */
