@@ -96,4 +96,17 @@
 #define DEFINE_GLOBAL_LEX_VAR (1 << 7)
 #define DEFINE_GLOBAL_FUNC_VAR (1 << 6)
 
+
+#define special_every    0
+#define special_some     1
+#define special_forEach  2
+#define special_map      3
+#define special_filter   4
+#define special_TA       8
+
+
+#define special_reduce       0
+#define special_reduceRight  1
+
+
 #endif //LOX_JS_CONSTANTS_H

@@ -577,3 +577,29 @@ int add_shape_property(JSContext *ctx, JSShape **psh,
     }
     return NULL;
 }
+
+
+ JSValue JS_GetPropertyInt64(JSContext *ctx, JSValueConst obj, int64_t idx)
+{
+    JSAtom prop;
+    JSValue val;
+
+    if ((uint64_t)idx <= INT32_MAX) {
+        /* fast path for fast arrays */
+        return JS_GetPropertyValue(ctx, obj, JS_NewInt32(ctx, idx));
+    }
+    prop = JS_NewAtomInt64(ctx, idx);
+    if (prop == JS_ATOM_NULL)
+        return JS_EXCEPTION;
+
+    val = JS_GetProperty(ctx, obj, prop);
+    JS_FreeAtom(ctx, prop);
+    return val;
+}
+
+ JSValue js_object_keys(JSContext *ctx, JSValueConst this_val,
+                              int argc, JSValueConst *argv, int kind)
+{
+    return JS_GetOwnPropertyNames2(ctx, argv[0],
+                                   JS_GPN_ENUM_ONLY | JS_GPN_STRING_MASK, kind);
+}

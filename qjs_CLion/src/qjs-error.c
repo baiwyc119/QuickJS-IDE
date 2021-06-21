@@ -2,7 +2,6 @@
 // Created by benpeng.jiang on 2021/6/18.
 //
 
-#include "qjs-error.h"
 #include "qjs-backtrace.h"
 #include <stdarg.h>
 

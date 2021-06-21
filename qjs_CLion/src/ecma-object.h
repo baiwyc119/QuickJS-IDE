@@ -88,7 +88,7 @@ JSShape *js_dup_shape(JSShape *sh);
 
  size_t get_shape_size(size_t hash_size, size_t prop_size);
 
-
+JSValue JS_GetPropertyInt64(JSContext *ctx, JSValueConst obj, int64_t idx);
 no_inline int resize_properties(JSContext *ctx, JSShape **psh,
                                 JSObject *p, uint32_t count);
 
@@ -101,5 +101,16 @@ JSShape *js_clone_shape(JSContext *ctx, JSShape *sh1);
 int JS_DefineAutoInitProperty(JSContext *ctx, JSValueConst this_obj,
                               JSAtom prop, JSAutoInitIDEnum id,
                               void *opaque, int flags);
+ JSValue js_object_keys(JSContext *ctx, JSValueConst this_val,
+                              int argc, JSValueConst *argv, int kind);
 
+ int JS_TryGetPropertyInt64(JSContext *ctx, JSValueConst obj, int64_t idx, JSValue *pval);
+int JS_DeletePropertyInt64(JSContext *ctx, JSValueConst obj, int64_t idx, int flags);
+
+JSValue js_object_valueOf(JSContext *ctx, JSValueConst this_val,
+                          int argc, JSValueConst *argv);
+ JSValue JS_GetOwnPropertyNames2(JSContext *ctx, JSValueConst obj1,
+                                       int flags, int kind);
+ JSValue js_object_toString(JSContext *ctx, JSValueConst this_val,
+                                  int argc, JSValueConst *argv);
 #endif //LOX_JS_PROPERTY_H

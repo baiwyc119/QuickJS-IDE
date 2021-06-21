@@ -7,22 +7,7 @@
 
 #include "qjs-api.h"
 #include "ecma-type-conversion.h"
-
-typedef struct StringBuffer {
-    JSContext *ctx;
-    JSString *str;
-    int len;
-    int size;
-    int is_wide_char;
-    int error_status;
-} StringBuffer;
-
-int string_buffer_init(JSContext *ctx, StringBuffer *s, int size);
-
-
- int string_buffer_concat(StringBuffer *s, const JSString *p,
-                                uint32_t from, uint32_t to);
-void string_buffer_free(StringBuffer *s);
+#include "qjs-stringbuffer.h"
 
 int js_string_memcmp(const JSString *p1, const JSString *p2, int len);
 
@@ -69,7 +54,8 @@ static JSString *js_alloc_string(JSContext *ctx, int max_len, int is_wide_char) 
     return p;
 }
 
- JSValue JS_ToQuotedString(JSContext *ctx, JSValueConst val1);
+JSValue JS_ToQuotedString(JSContext *ctx, JSValueConst val1);
+
 JSValue js_new_string8(JSContext *ctx, const uint8_t *buf, int len);
 
 JSValue JS_ConcatString(JSContext *ctx, JSValue op1, JSValue op2);
@@ -77,29 +63,14 @@ JSValue JS_ConcatString(JSContext *ctx, JSValue op1, JSValue op2);
 JSValue JS_ConcatString3(JSContext *ctx, const char *str1,
                          JSValue str2, const char *str3);
 
-/* 0 <= c <= 0xffff */
- int string_buffer_putc16(StringBuffer *s, uint32_t c);
-int string_buffer_putc8(StringBuffer *s, uint32_t c);
+JSValue JS_ToStringCheckObject(JSContext *ctx, JSValueConst val);
 
-int string_buffer_putc(StringBuffer *s, uint32_t c);
+int string_get(const JSString *p, int idx);
 
-JSValue string_buffer_end(StringBuffer *s);
+int string_getc(const JSString *p, int *pidx);
 
- int string_buffer_puts8(StringBuffer *s, const char *str);
- int string_buffer_concat_value_free(StringBuffer *s, JSValue v);
- int string_buffer_concat_value(StringBuffer *s, JSValueConst v);
- JSValue JS_ToStringCheckObject(JSContext *ctx, JSValueConst val);
+uint32_t hash_string(const JSString *str, uint32_t h);
 
+JSValue js_sub_string(JSContext *ctx, JSString *p, int start, int end);
 
- int string_get(const JSString *p, int idx);
-    int string_getc(const JSString *p, int *pidx);
-
- int string_buffer_init2(JSContext *ctx, StringBuffer *s, int size,
-                               int is_wide);
- int string_buffer_fill(StringBuffer *s, int c, int count);
-
- int string_buffer_write8(StringBuffer *s, const uint8_t *p, int len);
-
-
- uint32_t hash_string(const JSString *str, uint32_t h);
- #endif //LOX_JS_STRING_H
+#endif //LOX_JS_STRING_H

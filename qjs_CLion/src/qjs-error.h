@@ -48,4 +48,8 @@ JSValue JS_ThrowError2(JSContext *ctx, JSErrorEnum error_num,
 
  JSValue JS_ThrowError(JSContext *ctx, JSErrorEnum error_num,
                              const char *fmt, va_list ap);
+
+ JSValue JS_ThrowTypeErrorRevokedProxy(JSContext *ctx);
+JSValue JS_ThrowOutOfMemory(JSContext *ctx);
+JSValue JS_ThrowTypeErrorRevokedProxy(JSContext *ctx);
 #endif //LOX_JS_ERROR_H

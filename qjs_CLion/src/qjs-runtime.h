@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "config.h"
+#include "cutils.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -800,6 +801,8 @@ int JS_DefinePropertyValueUint32(JSContext *ctx, JSValueConst this_obj,
                                  uint32_t idx, JSValue val, int flags);
 int JS_DefinePropertyValueStr(JSContext *ctx, JSValueConst this_obj,
                               const char *prop, JSValue val, int flags);
+int JS_DefinePropertyValueInt64(JSContext *ctx, JSValueConst this_obj,
+                                int64_t idx, JSValue val, int flags);
 int JS_DefinePropertyGetSet(JSContext *ctx, JSValueConst this_obj,
                             JSAtom prop, JSValue getter, JSValue setter,
                             int flags);
@@ -1051,4 +1054,23 @@ int JS_SetModuleExportList(JSContext *ctx, JSModuleDef *m,
 } /* extern "C" { */
 #endif
 
+static int check_function(JSContext *ctx, JSValueConst obj)
+{
+    if (likely(JS_IsFunction(ctx, obj)))
+        return 0;
+    JS_ThrowTypeError(ctx, "not a function");
+    return -1;
+}
+
+static int check_exception_free(JSContext *ctx, JSValue obj)
+{
+    JS_FreeValue(ctx, obj);
+    return JS_IsException(obj);
+}
+
+static JSValue js_get_this(JSContext *ctx,
+                           JSValueConst this_val)
+{
+    return JS_DupValue(ctx, this_val);
+}
 #endif //LOX_JS_API_H

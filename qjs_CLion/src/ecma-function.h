@@ -6,6 +6,16 @@
 #define LOX_JS_ECMA_FUNCTION_H
 #include "qjs-runtime.h"
 #include "qjs-internal.h"
+JSContext *JS_GetFunctionRealm(JSContext *ctx, JSValueConst func_obj);
+JSValue js_create_from_ctor(JSContext *ctx, JSValueConst ctor,
+                            int class_id);
+
+ JSValue js_call_c_function(JSContext *ctx, JSValueConst func_obj,
+                                  JSValueConst this_obj,
+                                  int argc, JSValueConst *argv, int flags);
+ JSValue js_call_bound_function(JSContext *ctx, JSValueConst func_obj,
+                                      JSValueConst this_obj,
+                                      int argc, JSValueConst *argv, int flags);
 
  void free_arg_list(JSContext *ctx, JSValue *tab, uint32_t len);
  JSValue *build_arg_list(JSContext *ctx, uint32_t *plen,

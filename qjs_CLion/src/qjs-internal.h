@@ -1022,7 +1022,7 @@ typedef enum JSStrictEqModeEnum {
 
  __exception int js_get_length32(JSContext *ctx, uint32_t *pres,
                                        JSValueConst obj);
-static __exception int js_get_length64(JSContext *ctx, int64_t *pres,
+ __exception int js_get_length64(JSContext *ctx, int64_t *pres,
                                        JSValueConst obj);
 
 
