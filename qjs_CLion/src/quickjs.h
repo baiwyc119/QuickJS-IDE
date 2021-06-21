@@ -25,7 +25,14 @@
 #ifndef QUICKJS_H
 #define QUICKJS_H
 #include "qjs-api.h"
-#include "qjs-internal.h"
 #include "qjs-vm.h"
+#include "qjs-error.h"
+#include "qjs-string.h"
+#include "qjs-number.h"
+#include "qjs-atom.h"
+#include "qjs-gc.h"
+#include "ecma-object.h"
+#include "qjs-closure.h"
+
 
 #endif /* QUICKJS_H */

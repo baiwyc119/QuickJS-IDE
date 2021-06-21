@@ -455,8 +455,8 @@ int main(int argc, char **argv)
         }
     }
 
-    if (load_jscalc)
-        bignum_ext = 1;
+//    if (load_jscalc)
+//        bignum_ext = 1;
 
     if (trace_memory) {
         js_trace_malloc_init(&trace_data);

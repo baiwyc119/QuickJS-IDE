@@ -2,45 +2,17 @@
 // Created by benpeng.jiang on 2021/6/18.
 //
 
-#ifndef QJS_CLION_QJS_INTERNAL_H
-#define QJS_CLION_QJS_INTERNAL_H
+#ifndef LOX_JS_INTERNAL_H
+#define LOX_JS_INTERNAL_H
 
 #include "cutils.h"
 #include "list.h"
-
-#ifdef CONFIG_BIGNUM
+#include "qjs-constants.h"
+#include "cutils.h"
+#include <string.h>
+#include <math.h>
+#include "qjs-runtime.h"
 #include "libbf.h"
-#endif
-
-#define OPTIMIZE         1
-#define SHORT_OPCODES    1
-#if defined(EMSCRIPTEN)
-#define DIRECT_DISPATCH  0
-#else
-#define DIRECT_DISPATCH  1
-#endif
-
-#if defined(__APPLE__)
-#define MALLOC_OVERHEAD  0
-#else
-#define MALLOC_OVERHEAD  8
-#endif
-
-#if !defined(_WIN32)
-/* define it if printf uses the RNDN rounding mode instead of RNDNA */
-#define CONFIG_PRINTF_RNDN
-#endif
-
-/* define to include Atomics.* operations which depend on the OS
-   threads */
-#if !defined(EMSCRIPTEN)
-#define CONFIG_ATOMICS
-#endif
-
-#if !defined(EMSCRIPTEN)
-/* enable stack limitation */
-#define CONFIG_STACK_CHECK
-#endif
 
 
 /* dump object free */
@@ -954,4 +926,282 @@ enum OPCodeEnum {
     OP_TEMP_END,
 };
 
-#endif //QJS_CLION_QJS_INTERNAL_H
+
+/* argument of OP_special_object */
+typedef enum {
+    OP_SPECIAL_OBJECT_ARGUMENTS,
+    OP_SPECIAL_OBJECT_MAPPED_ARGUMENTS,
+    OP_SPECIAL_OBJECT_THIS_FUNC,
+    OP_SPECIAL_OBJECT_NEW_TARGET,
+    OP_SPECIAL_OBJECT_HOME_OBJECT,
+    OP_SPECIAL_OBJECT_VAR_OBJECT,
+    OP_SPECIAL_OBJECT_IMPORT_META,
+} OPSpecialObjectEnum;
+
+static inline BOOL is_strict_mode(JSContext *ctx)
+{
+    JSStackFrame *sf = ctx->rt->current_stack_frame;
+    return (sf && (sf->js_mode & JS_MODE_STRICT));
+}
+
+static inline int is_digit(int c) {
+    return c >= '0' && c <= '9';
+}
+
+static inline void js_dbuf_init(JSContext *ctx, DynBuf *s)
+{
+    dbuf_init2(s, ctx->rt, (DynBufReallocFunc *)js_realloc_rt);
+}
+
+static BOOL js_class_has_bytecode(JSClassID class_id)
+{
+    return (class_id == JS_CLASS_BYTECODE_FUNCTION ||
+            class_id == JS_CLASS_GENERATOR_FUNCTION ||
+            class_id == JS_CLASS_ASYNC_FUNCTION ||
+            class_id == JS_CLASS_ASYNC_GENERATOR_FUNCTION);
+}
+
+/* return NULL without exception if not a function or no bytecode */
+static JSFunctionBytecode *JS_GetFunctionBytecode(JSValueConst val)
+{
+    JSObject *p;
+    if (JS_VALUE_GET_TAG(val) != JS_TAG_OBJECT)
+        return NULL;
+    p = JS_VALUE_GET_OBJ(val);
+    if (!js_class_has_bytecode(p->class_id))
+        return NULL;
+    return p->u.func.function_bytecode;
+}
+
+/* set the new value and free the old value after (freeing the value
+   can reallocate the object data) */
+static inline void set_value(JSContext *ctx, JSValue *pval, JSValue new_val)
+{
+    JSValue old_val;
+    old_val = *pval;
+    *pval = new_val;
+    JS_FreeValue(ctx, old_val);
+}
+
+#if !defined(CONFIG_STACK_CHECK)
+/* no stack limitation */
+static inline uintptr_t js_get_stack_pointer(void)
+{
+    return 0;
+}
+
+static inline BOOL js_check_stack_overflow(JSRuntime *rt, size_t alloca_size)
+{
+    return FALSE;
+}
+#else
+/* Note: OS and CPU dependent */
+static inline uintptr_t js_get_stack_pointer(void)
+{
+    return (uintptr_t)__builtin_frame_address(0);
+}
+
+static inline BOOL js_check_stack_overflow(JSRuntime *rt, size_t alloca_size)
+{
+    uintptr_t sp;
+    sp = js_get_stack_pointer() - alloca_size;
+    return unlikely(sp < rt->stack_limit);
+}
+#endif
+
+typedef enum JSStrictEqModeEnum {
+    JS_EQ_STRICT,
+    JS_EQ_SAME_VALUE,
+    JS_EQ_SAME_VALUE_ZERO,
+} JSStrictEqModeEnum;
+ BOOL js_strict_eq2(JSContext *ctx, JSValue op1, JSValue op2,
+                          JSStrictEqModeEnum eq_mode);
+ BOOL js_strict_eq(JSContext *ctx, JSValue op1, JSValue op2);
+ BOOL js_same_value(JSContext *ctx, JSValueConst op1, JSValueConst op2);
+ BOOL js_same_value_zero(JSContext *ctx, JSValueConst op1, JSValueConst op2);
+
+ __exception int js_get_length32(JSContext *ctx, uint32_t *pres,
+                                       JSValueConst obj);
+static __exception int js_get_length64(JSContext *ctx, int64_t *pres,
+                                       JSValueConst obj);
+
+
+typedef struct BlockEnv {
+    struct BlockEnv *prev;
+    JSAtom label_name; /* JS_ATOM_NULL if none */
+    int label_break; /* -1 if none */
+    int label_cont; /* -1 if none */
+    int drop_count; /* number of stack elements to drop */
+    int label_finally; /* -1 if none */
+    int scope_level;
+    int has_iterator;
+} BlockEnv;
+
+typedef struct JSGlobalVar {
+    int cpool_idx; /* if >= 0, index in the constant pool for hoisted
+                      function defintion*/
+    uint8_t force_init : 1; /* force initialization to undefined */
+    uint8_t is_lexical : 1; /* global let/const definition */
+    uint8_t is_const   : 1; /* const definition */
+    int scope_level;    /* scope of definition */
+    JSAtom var_name;  /* variable name */
+} JSGlobalVar;
+
+typedef struct RelocEntry {
+    struct RelocEntry *next;
+    uint32_t addr; /* address to patch */
+    int size;   /* address size: 1, 2 or 4 bytes */
+} RelocEntry;
+
+typedef struct JumpSlot {
+    int op;
+    int size;
+    int pos;
+    int label;
+} JumpSlot;
+
+typedef struct LabelSlot {
+    int ref_count;
+    int pos;    /* phase 1 address, -1 means not resolved yet */
+    int pos2;   /* phase 2 address, -1 means not resolved yet */
+    int addr;   /* phase 3 address, -1 means not resolved yet */
+    RelocEntry *first_reloc;
+} LabelSlot;
+
+typedef struct LineNumberSlot {
+    uint32_t pc;
+    int line_num;
+} LineNumberSlot;
+
+typedef enum JSParseFunctionEnum {
+    JS_PARSE_FUNC_STATEMENT,
+    JS_PARSE_FUNC_VAR,
+    JS_PARSE_FUNC_EXPR,
+    JS_PARSE_FUNC_ARROW,
+    JS_PARSE_FUNC_GETTER,
+    JS_PARSE_FUNC_SETTER,
+    JS_PARSE_FUNC_METHOD,
+    JS_PARSE_FUNC_CLASS_CONSTRUCTOR,
+    JS_PARSE_FUNC_DERIVED_CLASS_CONSTRUCTOR,
+} JSParseFunctionEnum;
+
+typedef enum JSParseExportEnum {
+    JS_PARSE_EXPORT_NONE,
+    JS_PARSE_EXPORT_NAMED,
+    JS_PARSE_EXPORT_DEFAULT,
+} JSParseExportEnum;
+
+
+typedef struct JSFunctionDef {
+    JSContext *ctx;
+    struct JSFunctionDef *parent;
+    int parent_cpool_idx; /* index in the constant pool of the parent
+                             or -1 if none */
+    int parent_scope_level; /* scope level in parent at point of definition */
+    struct list_head child_list; /* list of JSFunctionDef.link */
+    struct list_head link;
+
+    BOOL is_eval; /* TRUE if eval code */
+    int eval_type; /* only valid if is_eval = TRUE */
+    BOOL is_global_var; /* TRUE if variables are not defined locally:
+                           eval global, eval module or non strict eval */
+    BOOL is_func_expr; /* TRUE if function expression */
+    BOOL has_home_object; /* TRUE if the home object is available */
+    BOOL has_prototype; /* true if a prototype field is necessary */
+    BOOL has_simple_parameter_list;
+    BOOL has_parameter_expressions; /* if true, an argument scope is created */
+    BOOL has_use_strict; /* to reject directive in special cases */
+    BOOL has_eval_call; /* true if the function contains a call to eval() */
+    BOOL has_arguments_binding; /* true if the 'arguments' binding is
+                                   available in the function */
+    BOOL has_this_binding; /* true if the 'this' and new.target binding are
+                              available in the function */
+    BOOL new_target_allowed; /* true if the 'new.target' does not
+                                throw a syntax error */
+    BOOL super_call_allowed; /* true if super() is allowed */
+    BOOL super_allowed; /* true if super. or super[] is allowed */
+    BOOL arguments_allowed; /* true if the 'arguments' identifier is allowed */
+    BOOL is_derived_class_constructor;
+    BOOL in_function_body;
+    BOOL backtrace_barrier;
+    JSFunctionKindEnum func_kind : 8;
+    JSParseFunctionEnum func_type : 8;
+    uint8_t js_mode; /* bitmap of JS_MODE_x */
+    JSAtom func_name; /* JS_ATOM_NULL if no name */
+
+    JSVarDef *vars;
+    int var_size; /* allocated size for vars[] */
+    int var_count;
+    JSVarDef *args;
+    int arg_size; /* allocated size for args[] */
+    int arg_count; /* number of arguments */
+    int defined_arg_count;
+    int var_object_idx; /* -1 if none */
+    int arg_var_object_idx; /* -1 if none (var object for the argument scope) */
+    int arguments_var_idx; /* -1 if none */
+    int arguments_arg_idx; /* argument variable definition in argument scope,
+                              -1 if none */
+    int func_var_idx; /* variable containing the current function (-1
+                         if none, only used if is_func_expr is true) */
+    int eval_ret_idx; /* variable containing the return value of the eval, -1 if none */
+    int this_var_idx; /* variable containg the 'this' value, -1 if none */
+    int new_target_var_idx; /* variable containg the 'new.target' value, -1 if none */
+    int this_active_func_var_idx; /* variable containg the 'this.active_func' value, -1 if none */
+    int home_object_var_idx;
+    BOOL need_home_object;
+
+    int scope_level;    /* index into fd->scopes if the current lexical scope */
+    int scope_first;    /* index into vd->vars of first lexically scoped variable */
+    int scope_size;     /* allocated size of fd->scopes array */
+    int scope_count;    /* number of entries used in the fd->scopes array */
+    JSVarScope *scopes;
+    JSVarScope def_scope_array[4];
+    int body_scope; /* scope of the body of the function or eval */
+
+    int global_var_count;
+    int global_var_size;
+    JSGlobalVar *global_vars;
+
+    DynBuf byte_code;
+    int last_opcode_pos; /* -1 if no last opcode */
+    int last_opcode_line_num;
+    BOOL use_short_opcodes; /* true if short opcodes are used in byte_code */
+
+    LabelSlot *label_slots;
+    int label_size; /* allocated size for label_slots[] */
+    int label_count;
+    BlockEnv *top_break; /* break/continue label stack */
+
+    /* constant pool (strings, functions, numbers) */
+    JSValue *cpool;
+    int cpool_count;
+    int cpool_size;
+
+    /* list of variables in the closure */
+    int closure_var_count;
+    int closure_var_size;
+    JSClosureVar *closure_var;
+
+    JumpSlot *jump_slots;
+    int jump_size;
+    int jump_count;
+
+    LineNumberSlot *line_number_slots;
+    int line_number_size;
+    int line_number_count;
+    int line_number_last;
+    int line_number_last_pc;
+
+    /* pc2line table */
+    JSAtom filename;
+    int line_num;
+    DynBuf pc2line;
+
+    char *source;  /* raw source, utf-8 encoded */
+    int source_len;
+
+    JSModuleDef *module; /* != NULL when parsing a module */
+} JSFunctionDef;
+
+#endif //LOX_JS_INTERNAL_H
+
