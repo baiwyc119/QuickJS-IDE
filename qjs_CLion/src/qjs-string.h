@@ -6,7 +6,7 @@
 #define LOX_JS_STRING_H
 
 #include "qjs-api.h"
-#include "qjs-type.h"
+#include "ecma-type-conversion.h"
 
 typedef struct StringBuffer {
     JSContext *ctx;

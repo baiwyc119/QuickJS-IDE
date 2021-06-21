@@ -845,7 +845,7 @@ void JS_FreeAtomRT(JSRuntime *rt, JSAtom v)
             !(p->len == 0 && p->is_wide_char != 0));
 }
 
-static __maybe_unused void print_atom(JSContext *ctx, JSAtom atom)
+ __maybe_unused void print_atom(JSContext *ctx, JSAtom atom)
 {
     char buf[ATOM_GET_STR_BUF_SIZE];
     const char *p;

@@ -7,7 +7,7 @@
 #include "qjs-api.h"
 #include "ecma-object.h"
 #include "qjs-error.h"
-#include "qjs-type.h"
+#include "ecma-type-conversion.h"
 #include "qjs-atom.h"
 #include "qjs-interrupts.h"
 #include "qjs-closure.h"

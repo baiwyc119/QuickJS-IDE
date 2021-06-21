@@ -6,7 +6,7 @@
 #define LOX_JS_QJS_OPERATION_H
 
 #include "qjs-api.h"
-#include "qjs-type.h"
+#include "ecma-type-conversion.h"
 #include "libbf.h"
 
  JSValue js_number_isSafeInteger(JSContext *ctx, JSValueConst this_val,

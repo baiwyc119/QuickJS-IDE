@@ -1,2 +1,1 @@
-console.log("hello word!");
-print("C语言中文网")
+console.log("quickjs好");

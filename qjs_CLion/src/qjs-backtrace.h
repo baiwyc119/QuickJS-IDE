@@ -7,6 +7,8 @@
 #include "qjs-api.h"
 #include "ecma-object.h"
 
+ int find_line_num(JSContext *ctx, JSFunctionBytecode *b,
+                         uint32_t pc_value);
 void build_backtrace(JSContext *ctx, JSValueConst error_obj,
                             const char *filename, int line_num,
                             int backtrace_flags);

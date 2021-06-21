@@ -107,7 +107,7 @@
 }
 
 
-static int find_line_num(JSContext *ctx, JSFunctionBytecode *b,
+ int find_line_num(JSContext *ctx, JSFunctionBytecode *b,
                          uint32_t pc_value)
 {
     const uint8_t *p_end, *p;

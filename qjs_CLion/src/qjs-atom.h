@@ -135,4 +135,7 @@ JSAtom JS_NewAtomStr(JSContext *ctx, JSString *p);
 
 BOOL JS_AtomIsString(JSContext *ctx, JSAtom v);
 
+ __maybe_unused void print_atom(JSContext *ctx, JSAtom atom);
+
+
 #endif //LOX_JS_ATOM_H
